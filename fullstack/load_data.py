@@ -15,4 +15,3 @@ cheesepizza = MenuItem(name="Cheese Pizza", description="Made with all natural i
 session.add(cheesepizza)
 #session.commit()
 print(session.query(MenuItem).all())
-
