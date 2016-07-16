@@ -1,37 +1,73 @@
-
-<!-- saved from url=(0079)https://storage.googleapis.com/supplemental_media/udacityu/3601619034/menu.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
-.en-markup-crop-options {
-    top: 18px !important;
-    left: 50% !important;
-    margin-left: -100px !important;
-    width: 200px !important;
-    border: 2px rgba(255,255,255,.38) solid !important;
-    border-radius: 4px !important;
-}
-
-.en-markup-crop-options div div:first-of-type {
-    margin-left: 0px !important;
-}
-</style></head><body>
-
-<h1>{{restaurant.name}}</h1>
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
 
 
-{% for i in items %}
+	<body>
+	<div class = 'pane'>
+		<div class = 'header'>
+		<h1>{{ restaurant.name }}</h1>
+	</div>
 
-<div>
+	<a href = '{{url_for('newMenuItem', restaurant_id = restaurant.id) }}'>Create New Item</a>
 
-<p>{{i.name}}</p>
 
-<p>{{i.description}}</p>
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
 
-<p> {{i.price}} </p>
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
 
 </div>
 
 
-{% endfor %}
+		{% for i in items %}
+    <div class = 'nameAndPrice'>
+		<span class = 'name'><p>{{i.name}}</p></span>
+
+		<span class = 'price'>
 
 
-<div id="techsmith-snagitchrome-extension"></div></body></html>
+		<p>{{i.price}} </p>
+	</span>
+	</div>
+
+
+
+	<div class = 'description'>
+		<p>{{i.description}}</p>
+	</div>
+
+
+
+	<div class = "editdeletepane">
+
+	<a href='{{url_for('editMenuItem',restaurant_id = restaurant.id, menu_id=i.id)}}' >Edit</a>
+	<a href='{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id=i.id)}}' >
+	Delete</a>
+	</div>
+
+
+
+
+		{% endfor %}
+
+
+
+
+
+</div>
+</div>
+	</body>
+
+
+
+
+</html>
